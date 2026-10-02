@@ -3,28 +3,6 @@
 #include <iostream>
 using namespace std;
 
-static string trim(const string& s) {
-    size_t inicio = s.find_first_not_of(" \t\r\n");
-    if (inicio == string::npos) return "";
-    size_t fim = s.find_last_not_of(" \t\r\n");
-    return s.substr(inicio, fim - inicio + 1);
-}
-
-static Item parseItem(const string& linha) {
-    size_t p1 = linha.find(';');
-    size_t p2 = linha.find(';', p1 + 1);
-    size_t p3 = linha.find(';', p2 + 1);
-    size_t p4 = linha.find(';', p3 + 1);
-
-    string nome = trim(linha.substr(0, p1));
-    char tipo = trim(linha.substr(p1 + 1, p2 - p1 - 1))[0];
-    bool combate = trim(linha.substr(p2 + 1, p3 - p2 - 1)) == "1";
-    int fa = stoi(trim(linha.substr(p3 + 1, p4 - p3 - 1)));
-    int dano = stoi(trim(linha.substr(p4 + 1)));
-
-    return Item(nome, tipo, combate, fa, dano);
-}
-
 Cena::Cena() : tipo(NARRATIVA), qtdItensOferecidos(0), qtdOpcoes(0) {}
 
 bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
@@ -53,7 +31,7 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
 
             if (l.rfind("I:", 0) == 0) {
                 if (qtdItensOferecidos < MAX_ITENS_OFERECIDOS) {
-                    itensOferecidos[qtdItensOferecidos] = parseItem(trim(l.substr(2)));
+                    itensOferecidos[qtdItensOferecidos] = Item::fromString(trim(l.substr(2)));
                     qtdItensOferecidos++;
                 }
             } else if (l[0] == '#') {
@@ -97,7 +75,7 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
             else if (chave == "P") prov = stoi(valor);
             else if (chave == "I") {
                 temItemMonstro = true;
-                itemMonstro = parseItem(valor);
+                itemMonstro = Item::fromString(valor);
             }
         }
     }
