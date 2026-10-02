@@ -24,6 +24,14 @@ public:
     int getDano() const;
 
     void imprimir() const;
+
+    // Converte de/para o texto "nome;tipo;combate;FA;dano"
+    // (usado na leitura das cenas e no save)
+    static Item fromString(const string& linha);
+    string toString() const;
 };
+
+// Remove espacos do inicio e do fim de um texto
+string trim(const string& s);
 
 #endif
