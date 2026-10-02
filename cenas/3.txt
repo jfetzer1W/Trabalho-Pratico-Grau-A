@@ -1,0 +1,5 @@
+#3
+O corredor a direita termina em uma porta macica de pedra, coberta por simbolos que parecem contar a historia da queda de Eldorvale. Voce pode tentar forcar a porta com toda sua forca, ou procurar por uma passagem alternativa nas paredes ao redor.
+
+#5: Forcar a porta com toda a sua forca
+#6: Procurar uma passagem alternativa

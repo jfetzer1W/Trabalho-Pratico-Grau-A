@@ -1,0 +1,10 @@
+m
+As profundezas se abrem em uma vasta caverna. Ali, enrolado sobre uma montanha de ouro, um Dragao Sombrio ergue a cabeca e fixa em voce seus olhos ambarinos, exalando fumaca pelas narinas.
+
+N: Dragao Sombrio
+M: S
+H: 9
+S: 6
+E: 14
+T: 200
+11;9

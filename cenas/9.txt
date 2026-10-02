@@ -1,0 +1,5 @@
+#9
+Voce corre pelo corredor escuro ate chegar a um beco sem saida, coberto por teias grossas que bloqueiam a passagem. Voce pode tentar enfrentar o que quer que esteja escondido entre as teias, ou recuar e tentar o outro caminho que viu antes.
+
+#7: Enfrentar o que esta escondido nas teias
+#3: Recuar e tentar o outro caminho

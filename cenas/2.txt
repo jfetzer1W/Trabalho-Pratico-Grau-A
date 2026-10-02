@@ -1,0 +1,6 @@
+#2
+O corredor a esquerda desce em espiral. Pendurada em um gancho enferrujado na parede, voce encontra uma corda resistente, ainda em bom estado. Voce guarda a corda e continua descendo, ouvindo um som distante de passos arrastados.
+
+I: Corda Resistente;c;0;0;0
+
+#4: Continuar descendo em direcao ao som

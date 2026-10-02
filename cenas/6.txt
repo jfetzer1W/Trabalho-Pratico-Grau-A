@@ -1,0 +1,6 @@
+#6
+Examinando as paredes com cuidado, voce percebe que uma das pedras esta solta. Ao empurra-la, uma passagem secreta se abre, escondendo uma velha chave enferrujada em um nicho na parede.
+
+I: Chave Enferrujada;c;0;0;0
+
+#8: Seguir pela passagem secreta

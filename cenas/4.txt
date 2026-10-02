@@ -1,0 +1,9 @@
+m
+O som de passos arrastados se aproxima rapidamente. Das sombras surge um Goblin Batedor, arma tosca em punho, os olhos brilhando com fome de batalha.
+
+N: Goblin Batedor
+M: N
+H: 5
+S: 4
+E: 6
+8;9

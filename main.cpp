@@ -1,8 +1,7 @@
 #include "Jogo.h"
 
 int main() {
-    Jogo jogo;
+    Jogo jogo("cenas", "save.txt");
     jogo.executar();
-
     return 0;
 }
