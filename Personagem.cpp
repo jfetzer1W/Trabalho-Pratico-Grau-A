@@ -23,7 +23,6 @@ int Personagem::getSorte() const { return sorte; }
 bool Personagem::isArcano() const { return arcano; }
 
 void Personagem::setEnergiaAtual(int e) { energia = e; }
-void Personagem::setSorteAtual(int s) { sorte = s; }
 
 void Personagem::receberDano(int dano) {
     energia -= dano;
