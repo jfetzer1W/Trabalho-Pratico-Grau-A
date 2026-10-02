@@ -18,21 +18,6 @@ static int lerInteiro() {
     return valor;
 }
 
-// Interpreta uma linha "nome;tipo;combate;FA;dano" -- igual ao parseItem de Cena.cpp,
-// repetido aqui porque e um arquivo .cpp diferente (cada um cuida do que le).
-static Item parseItem(const string& linha) {
-    size_t p1 = linha.find(';');
-    size_t p2 = linha.find(';', p1 + 1);
-    size_t p3 = linha.find(';', p2 + 1);
-    size_t p4 = linha.find(';', p3 + 1);
-    string nome = linha.substr(0, p1);
-    char tipo = linha.substr(p1 + 1, p2 - p1 - 1)[0];
-    bool combate = linha.substr(p2 + 1, p3 - p2 - 1) == "1";
-    int fa = stoi(linha.substr(p3 + 1, p4 - p3 - 1));
-    int dano = stoi(linha.substr(p4 + 1));
-    return Item(nome, tipo, combate, fa, dano);
-}
-
 Jogo::Jogo(string pastaCenas, string arquivoSave)
     : cenaAtual(1), qtdCenasVisitadas(0), pastaCenas(pastaCenas),
       arquivoSave(arquivoSave), jogoAtivo(false) {}
@@ -55,14 +40,22 @@ void Jogo::executar() {
         if (!jaVisitada && qtdCenasVisitadas < MAX_CENAS_VISITADAS)
             cenasVisitadas[qtdCenasVisitadas++] = cenaAtual;
 
-        salvarJogo();   // salva automaticamente a cada nova cena (regra do enunciado)
-
-        if (cena.getTipo() == NARRATIVA) {
+        // So entrega os itens na PRIMEIRA vez que passa pela cena
+        if (!jaVisitada) {
             for (int i = 0; i < cena.getQtdItensOferecidos(); i++) {
                 const Item& item = cena.getItemOferecido(i);
                 cout << "\n>> Voce encontrou um item: " << item.getNome() << "!" << endl;
                 personagem.getInventario().adicionarItem(item);
+                if (item.getTipo() == 'w') {   // arma nova: equipa automaticamente
+                    personagem.getInventario().equiparArma(item.getNome());
+                    cout << ">> Voce equipou " << item.getNome() << "!" << endl;
+                }
             }
+        }
+
+        salvarJogo();   // salva automaticamente a cada nova cena (regra do enunciado)
+
+        if (cena.getTipo() == NARRATIVA) {
             if (cena.getQtdOpcoes() == 0) {
                 cout << "\n================================================" << endl;
                 cout << cena.getTexto() << endl;
@@ -137,10 +130,14 @@ void Jogo::criarPersonagem() {
 
     cout << "Pontos restantes: " << pontosRestantes << ". Pontos para Sorte (0 a " << min(6, pontosRestantes) << "): ";
     int pS = lerInteiro();
-    while (pS < 0 || pS > 6 || pS > pontosRestantes) { cout << "Valor invalido: "; pS = lerInteiro(); }
+    // Energia aceita no maximo 6 pontos, entao a Sorte precisa usar o que sobrar acima disso
+    while (pS < 0 || pS > 6 || pS > pontosRestantes || pontosRestantes - pS > 6) {
+        cout << "Valor invalido (sobrariam mais de 6 pontos para Energia): ";
+        pS = lerInteiro();
+    }
     pontosRestantes -= pS;
 
-    int pE = pontosRestantes > 6 ? 6 : pontosRestantes;
+    int pE = pontosRestantes;
     cout << "Pontos restantes (" << pontosRestantes << ") atribuidos a Energia." << endl;
 
     int habilidade = 6 + pH;
@@ -234,6 +231,10 @@ void Jogo::telaBatalha(Cena& cena) {
         cout << "4 - Fugir" << endl;
         cout << "Escolha: ";
         int acao = lerInteiro();
+        while (acao < 1 || acao > 4 || (acao == 2 && !podeUsarMagia)) {
+            cout << "Opcao invalida. Escolha: ";
+            acao = lerInteiro();
+        }
 
         if (acao == 4) {
             cout << "\nVoce foge, mas leva um golpe (2 de dano)." << endl;
@@ -254,7 +255,7 @@ void Jogo::telaBatalha(Cena& cena) {
             bonusFA += personagem.getInventario().getArmaEquipada()->getFA();
             bonusDano += personagem.getInventario().getArmaEquipada()->getDano();
         }
-        if (acao == 2 && podeUsarMagia) {
+        if (acao == 2) {
             cout << ">> Voce conjura uma magia!" << endl;
             bonusFA += 3;
         }
@@ -330,10 +331,7 @@ void Jogo::salvarJogo() {
 
     arq << "ITENS:" << inv.getQuantidadeItens() << endl;
     for (int i = 0; i < inv.getQuantidadeItens(); i++) {
-        const Item& item = inv.getItem(i);
-        arq << item.getNome() << ";" << item.getTipo() << ";"
-            << (item.podeUsarEmCombate() ? 1 : 0) << ";"
-            << item.getFA() << ";" << item.getDano() << endl;
+        arq << inv.getItem(i).toString() << endl;
     }
 
     arq << "ARMAEQUIPADA:" << (inv.getArmaEquipada() ? inv.getArmaEquipada()->getNome() : "") << endl;
@@ -379,12 +377,7 @@ bool Jogo::carregarDoArquivo() {
             }
         }
         else if (chave == "MAGIAS") {
-            // Guardamos os nomes temporariamente; so adicionamos ao personagem apos "ITENS",
-            // que e quando personagem.configurar() ja foi chamado.
             size_t pos = 0;
-            personagem.configurar(nome, habilidade, energiaMax, sorte, arcano);
-            personagem.setEnergiaAtual(energia);
-            personagem.setSorteAtual(sorte);
             while (pos < valor.size()) {
                 size_t prox = valor.find(';', pos);
                 string nomeMagia = (prox == string::npos) ? valor.substr(pos) : valor.substr(pos, prox - pos);
@@ -392,20 +385,24 @@ bool Jogo::carregarDoArquivo() {
                 if (prox == string::npos) break;
                 pos = prox + 1;
             }
-            personagem.getInventario().adicionarTesouro(tesouro);
-            personagem.getInventario().adicionarProvisoes(provisoes);
         }
         else if (chave == "ITENS") {
             qtdItens = stoi(valor);
             for (int i = 0; i < qtdItens; i++) {
                 string linhaItem;
                 getline(arq, linhaItem);
-                personagem.getInventario().adicionarItem(parseItem(linhaItem));
+                personagem.getInventario().adicionarItem(Item::fromString(linhaItem));
             }
         }
         else if (chave == "ARMAEQUIPADA") armaNome = valor;
         else if (chave == "ARMADURAEQUIPADA") armaduraNome = valor;
     }
+
+    // Depois de ler o arquivo inteiro, monta o personagem com os valores lidos
+    personagem.configurar(nome, habilidade, energiaMax, sorte, arcano);
+    personagem.setEnergiaAtual(energia);
+    personagem.getInventario().adicionarTesouro(tesouro);
+    personagem.getInventario().adicionarProvisoes(provisoes);
 
     if (!armaNome.empty()) personagem.getInventario().equiparArma(armaNome);
     if (!armaduraNome.empty()) personagem.getInventario().equiparArmadura(armaduraNome);
