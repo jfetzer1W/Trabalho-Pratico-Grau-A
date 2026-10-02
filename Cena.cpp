@@ -10,8 +10,6 @@ static string trim(const string& s) {
     return s.substr(inicio, fim - inicio + 1);
 }
 
-// Interpreta uma linha "nome;tipo;combate;FA;dano" e monta um Item.
-// Feito "na mao" com find/substr (sem vector) porque o numero de campos e sempre 5, fixo.
 static Item parseItem(const string& linha) {
     size_t p1 = linha.find(';');
     size_t p2 = linha.find(';', p1 + 1);
@@ -36,13 +34,10 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
         cout << "ERRO: nao foi possivel abrir a cena " << caminho << endl;
         return false;
     }
-
-    // 1) Primeira linha: "m" = cena de monstro; qualquer outra coisa = narrativa
     string primeiraLinha;
     getline(arq, primeiraLinha);
     tipo = (trim(primeiraLinha) == "m") ? CENA_MONSTRO : NARRATIVA;
 
-    // 2) Texto da cena: le ate achar uma linha em branco
     string linha;
     texto = "";
     while (getline(arq, linha)) {
@@ -52,7 +47,6 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
     }
 
     if (tipo == NARRATIVA) {
-        // 3a) Le "I: ..." (item oferecido) e "#N: texto" (opcoes)
         while (getline(arq, linha)) {
             string l = trim(linha);
             if (l.empty()) continue;
@@ -72,7 +66,6 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
             }
         }
     } else {
-        // 3b) Cena de monstro: campos "CHAVE: valor" e, por ultimo, "sucesso;derrota"
         string nomeMonstro;
         int hab = 0, srt = 0, en = 0, tes = -1, prov = -1;
         bool temItemMonstro = false;
@@ -81,8 +74,6 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
         while (getline(arq, linha)) {
             string l = trim(linha);
             if (l.empty()) continue;
-
-            // A ultima linha ("sucesso;derrota") tem ';' mas NAO tem ':'
             if (l.find(':') == string::npos && l.find(';') != string::npos) {
                 size_t p = l.find(';');
                 int cenaSucesso = stoi(trim(l.substr(0, p)));
@@ -98,7 +89,7 @@ bool Cena::carregarDeArquivo(int numeroCena, const string& caminhoPasta) {
             string valor = trim(l.substr(doisPontos + 1));
 
             if (chave == "N") nomeMonstro = valor;
-            else if (chave == "M") { /* S/N arcano -- nao usado nesta versao simplificada */ }
+            else if (chave == "M") {}
             else if (chave == "H") hab = stoi(valor);
             else if (chave == "S") srt = stoi(valor);
             else if (chave == "E") en = stoi(valor);

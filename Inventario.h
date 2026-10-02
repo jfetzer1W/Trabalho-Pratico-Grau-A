@@ -5,11 +5,8 @@
 #include <string>
 using namespace std;
 
-const int MAX_MAGIAS = 10;   // um personagem nao vai conhecer mais que 10 magias
+const int MAX_MAGIAS = 10;
 
-// Guarda tudo que o personagem carrega. Os itens ficam num array ALOCADO
-// DINAMICAMENTE (com new[]), que dobra de tamanho quando enche -- exatamente
-// o que a aula de Ponteiros ensinou, sem usar vector.
 class Inventario {
 private:
     Item* itens;          // ponteiro para o primeiro elemento do array

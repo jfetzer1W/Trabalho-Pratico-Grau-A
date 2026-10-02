@@ -6,7 +6,7 @@
 #include "Monstro.h"
 using namespace std;
 
-const int MAX_OPCOES = 8;           // nenhuma cena do nosso jogo passa disso
+const int MAX_OPCOES = 8;
 const int MAX_ITENS_OFERECIDOS = 3;
 
 struct Opcao {
@@ -16,9 +16,6 @@ struct Opcao {
 
 enum TipoCena { NARRATIVA, CENA_MONSTRO };
 
-// Le e interpreta um arquivo "N.txt" da pasta de cenas, seguindo o formato do enunciado.
-// Usa arrays de tamanho FIXO para opcoes/itens (nao precisam crescer: o numero
-// de opcoes de uma cena e pequeno e conhecido, diferente do inventario do jogador).
 class Cena {
 private:
     TipoCena tipo;

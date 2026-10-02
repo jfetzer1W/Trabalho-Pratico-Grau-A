@@ -1,6 +1,6 @@
 #2
-O corredor a esquerda desce em espiral. Pendurada em um gancho enferrujado na parede, voce encontra uma corda resistente, ainda em bom estado. Voce guarda a corda e continua descendo, ouvindo um som distante de passos arrastados.
+O corredor a esquerda desce em por uma rampa escura. Pendurado na parede voce morcegos e continua com coragem quando na sua frente voce um encotra uma resistente corda, ainda em bom estado. Voce guarda a corda e continua descendo, ouvindo um som distante de passos cansados como se alguem estivesse se arrastando pelo chao no meio da escuridao.
 
-I: Corda Resistente;c;0;0;0
+I: Corda ;c;0;0;0
 
 #4: Continuar descendo em direcao ao som

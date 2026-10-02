@@ -1,5 +1,5 @@
 m
-O beco termina em uma camara coberta de teias espessas. Algo se move nas sombras acima e uma Aranha Gigante desce lentamente, suas patas rangendo contra a pedra.
+O beco termina em uma camara coberta de teias. Algo se move nas sombras acima e uma Aranha Gigante desce lentamente, suas patas rangendo contra a pedra.
 
 N: Aranha Gigante
 M: N

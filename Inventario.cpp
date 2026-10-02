@@ -137,7 +137,7 @@ int Inventario::getQuantidadeItens() const { return quantidade; }
 const Item& Inventario::getItem(int indice) const { return itens[indice]; }
 
 void Inventario::imprimir() const {
-    cout << "===== INVENTARIO =====" << endl;
+    cout << "INVENTARIO" << endl;
     cout << "Tesouro: " << tesouro << " moedas de ouro" << endl;
     cout << "Provisoes: " << provisoes << endl;
     cout << "Itens:" << endl;
@@ -151,5 +151,4 @@ void Inventario::imprimir() const {
     if (qtdMagias == 0) cout << "  (nenhuma)" << endl;
     for (int i = 0; i < qtdMagias; i++)
         cout << "  - " << magias[i] << endl;
-    cout << "=======================" << endl;
 }

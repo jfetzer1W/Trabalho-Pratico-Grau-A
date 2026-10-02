@@ -1,5 +1,5 @@
 #1
-Voce desperta em meio as ruinas cobertas de musgo de Eldorvale, antiga cidade que outrora brilhou sob o ceu do reino. O vento sussurra entre as colunas quebradas enquanto voce aperta o cabo da sua adaga. A sua frente, o corredor se divide em duas direcoes: um caminho a esquerda, escuro e umido, e outro a direita, marcado por simbolos antigos entalhados na pedra.
+Voce acorda perdido em meio as ruinas escuras de Sao leo, seculos apos uma bomba nuclear deixar tudo em ruinas e aniqular toda a populacao, antiga cidade que que era governada pelo reino da Unisinos era prospera e tecnologica e agora passou a ser escura e dominada por diversos monstros. Uma chuva fina e uma brisa congelante o fazem levantar rapidamente e pegar a adaga que estava ao seu lado no chao. A sua frente, o corredor se divide em duas direcoes: um caminho a esquerda, escuro e com barulhos estranhos, e outro a direita, marcado por simbolos antigos pintados na pedra.
 
 #2: Seguir pelo corredor a esquerda, em direcao a escuridao
 #3: Seguir pelo corredor a direita, em direcao aos simbolos antigos

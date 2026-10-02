@@ -1,7 +1,7 @@
 m
-O som de passos arrastados se aproxima rapidamente. Das sombras surge um Goblin Batedor, arma tosca em punho, os olhos brilhando com fome de batalha.
+O som dos comeca a ficar claro enquanto voce se aproxima rapidamente. Das sombras surge um Morcego Gigante, arma nas assas e machucado como se ja estivesse batalhando a muito tempo, os olhos brilhando de assustado e uma raiva de voce ter atrapalhado seu descanso em seu recinto.
 
-N: Goblin Batedor
+N: Morcego Gigante
 M: N
 H: 5
 S: 4

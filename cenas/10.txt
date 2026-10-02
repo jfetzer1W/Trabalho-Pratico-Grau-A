@@ -1,7 +1,7 @@
 m
-As profundezas se abrem em uma vasta caverna. Ali, enrolado sobre uma montanha de ouro, um Dragao Sombrio ergue a cabeca e fixa em voce seus olhos ambarinos, exalando fumaca pelas narinas.
+As profundezas se abrem em uma vasta caverna. Ali, enrolado sobre uma montanha de ouro, uma Barata Radioativa ergue a cabeca e fixa em voce seus olhos, suas asas comecam a bater rapidamento demontrando a enfuricido que voce nao deveria estar ali.
 
-N: Dragao Sombrio
+N: Barata Radioativa
 M: S
 H: 9
 S: 6

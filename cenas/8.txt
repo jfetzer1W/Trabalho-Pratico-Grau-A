@@ -1,5 +1,5 @@
 #8
-Voce chega a uma camara circular iluminada por uma fenda no teto. No centro, sobre um pedestal de pedra, repousa uma espada antiga, sua lamina ainda brilhando apesar dos seculos. Ao pega-la, um rugido profundo ecoa vindo das profundezas abaixo: algo enorme acabou de acordar.
+Voce chega a uma camara circular iluminada por uma fenda no teto. No centro, sobre um pedestal de pedra, repousa uma espada antiga, sua lamina ainda brilhando e o nome em seu cabo, o temido reitor da unisinos. Ao pega-la, um rugido profundo ecoa vindo das profundezas abaixo: algo enorme acabou de acordar.
 
 I: Espada Antiga;w;1;2;1
 
