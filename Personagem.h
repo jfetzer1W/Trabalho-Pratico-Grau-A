@@ -29,7 +29,6 @@ public:
     bool isArcano() const;
 
     void setEnergiaAtual(int e);
-    void setSorteAtual(int s);
 
     void receberDano(int dano);
     void curar(int qtd);
